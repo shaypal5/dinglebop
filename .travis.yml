@@ -1,0 +1,21 @@
+language: python
+python:
+- '3.4'
+- '3.5'
+- '3.6'
+# notifications:
+#   email:
+#     on_success: change
+#     on_failure: always
+before_install:
+  - pip install codecov
+install:
+  - pip install ".[test]"
+before_script:
+  - mkdir ~/.dinglebop
+  - openssl aes-256-cbc -K $encrypted_b00ed207d6c3_key -iv $encrypted_b00ed207d6c3_iv -in ./scripts/dinglebop_mongodb_cred.json.enc -out ~/.dinglebop/dinglebop_mongodb_cred.json -d
+#  - chmod +x ./scripts/before_script.sh
+#  - ./scripts/before_script.sh
+script: pytest --cov=dinglebop
+after_success:
+  - codecov
