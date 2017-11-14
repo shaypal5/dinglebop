@@ -47,14 +47,14 @@ The configuration file should adhere to the following structure:
 .. code-block:: json
     
     {
-        "dingles": [
+        "dingles": {
             "production_dingle": {
                 # dingle configuration...
             },
             "research_dingle": {
                 # dingle configuration...
             }
-        ]
+        }
     }
 
 The inner structure for each dingle depdends on its type.

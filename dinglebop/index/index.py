@@ -111,7 +111,7 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def _add_index_type(cls, idx_type_identifier, idx_type_class):
         cls._INDEX_CLASS_BY_TYPE[idx_type_identifier] = idx_type_class
 
-    @classmedthod
+    @classmethod
     def get_index_by_conf_dict(cls, conf_dict):
         """Returns a DingleIndex instance by the given conf_dict.
 

@@ -1,8 +1,8 @@
 """Dinglebop indexes."""
 
-from index import DingleIndex
+from .index import DingleIndex
 
-from mongodb import MongoDBIndex
+from .mongodb import MongoDBIndex
 DingleIndex._add_index_type('mongodb', MongoDBIndex)
 
 # clean the namespace of the package

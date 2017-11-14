@@ -45,7 +45,7 @@ class MongoDBIndex(DingleIndex):
         self.collection_name = collection_name
         self.extra_kwargs = kwargs
         if 'host' in self.extra_kwargs:
-            self.extra_kwargs.pop('host')  # in case someone gave host
+            self.extra_kwargs.pop('host')  # pragma: no cover
         self.uris = MongoDBIndex._mongodb_uris(
             usr=username, pwd=password, hosts=hosts)
 

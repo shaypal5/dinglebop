@@ -7,14 +7,13 @@ del get_versions
 
 # === module imports
 
-from .core import (
-    DataSource,
-    DataTap,
+from .dingle import (  # noqa: F401
+    Dingle,
 )
 
-import dinglebop.mongodb
+# import dinglebop.mongodb
 
-for name in ['dinglebop', 'core', 'shared']:
+for name in ['_version', 'dingle']:
     try:
         globals().pop(name)
     except KeyError:
