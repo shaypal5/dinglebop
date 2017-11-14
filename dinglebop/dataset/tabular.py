@@ -3,6 +3,9 @@
 from .dataset import (
     Dataset,
 )
+from ..shared import (
+    CACHE_DIR_PATH,
+)
 
 
 class TabularDataset(Dataset):
@@ -19,4 +22,3 @@ class TabularDataset(Dataset):
             is fetched.
         """
         pass
-
