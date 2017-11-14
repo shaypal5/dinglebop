@@ -13,7 +13,7 @@ install:
   - pip install ".[test]"
 before_script:
   - mkdir ~/.dinglebop
-  - openssl aes-256-cbc -K $encrypted_b00ed207d6c3_key -iv $encrypted_b00ed207d6c3_iv -in ./scripts/dinglebop_mongodb_cred.json.enc -out ~/.dinglebop/dinglebop_mongodb_cred.json -d
+  - openssl aes-256-cbc -K $encrypted_21a56f098485_key -iv $encrypted_21a56f098485_iv -in ./tests/dinglebop_cfg.json.enc -out ~\/.dinglebop/dinglebop_cfg.json -d - mkdir ~/.dinglebop
 #  - chmod +x ./scripts/before_script.sh
 #  - ./scripts/before_script.sh
 script: pytest --cov=dinglebop
