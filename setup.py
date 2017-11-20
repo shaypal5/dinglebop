@@ -1,6 +1,6 @@
 """Setup for the dinglebop package."""
 
-#!/usr/bin/env python
+# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -15,7 +15,7 @@ if sys.version_info.major < 3 or sys.version_info.minor < 4:
     sys.exit(1)
 
 
-INSTALL_REQUIRES = ['pymongo>=3.4', 'strct']
+INSTALL_REQUIRES = []
 TEST_REQUIRES = ['pytest', 'coverage', 'pytest-cov']
 
 with open('README.rst') as f:
@@ -41,6 +41,8 @@ setuptools.setup(
     ],
     extras_require={
         'test': TEST_REQUIRES + INSTALL_REQUIRES,
+        'mongodb': ['pymongo>=3.4'],
+        'azure': ['azure-storage-blob>=0.37.1'],
     },
     classifiers=[
         # Trove classifiers

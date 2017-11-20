@@ -10,7 +10,7 @@ del get_versions
 from .dingle import (  # noqa: F401
     Dingle,
 )
-
+import dinglebop.dataset
 # import dinglebop.mongodb
 
 for name in ['_version', 'dingle']:

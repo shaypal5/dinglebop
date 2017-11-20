@@ -21,7 +21,7 @@ class MongoDBIndex(DingleIndex):
     hosts : list
         A list of host address string of the form <hostname>:<port>.
     username : str
-        A user name used for authentication. The corresponding used must have
+        A user name used for authentication. The corresponding user must have
         writing permissions for the provided collection.
     password : str
         A password used for authentication.

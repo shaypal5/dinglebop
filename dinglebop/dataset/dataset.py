@@ -12,7 +12,7 @@ from ..shared import (
 DEFAULT_SOURCE_TYPE = 'unspecified'
 
 
-class Dataset(object):
+class Dataset(object, metaclass=abc.ABCMeta):
     """A base class for dinglebop datasets.
 
     Arguments
@@ -35,6 +35,11 @@ class Dataset(object):
         candidates = sorted(glob.glob(pattern))
         # last fname, lexicographically
         return candidates[-1]
+
+    @abc.abstractmethod
+    def tap(self):
+        """Returns a fresh version of this dataset."""
+        pass
 
 
 class InMemoryDataSet(Dataset, metaclass=abc.ABCMeta):

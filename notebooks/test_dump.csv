@@ -1,2 +1,0 @@
-_id,address.building,address.coord.0,address.coord.1,address.street,address.zipcode,borough,cuisine,grades.0.date,grades.0.grade,grades.0.score,grades.1.date,grades.1.grade,grades.1.score,grades.2.date,grades.2.grade,grades.2.score,grades.3.date,grades.3.grade,grades.3.score,name,restaurant_id
-59e8a02a297efbb3162667f1,469,-73.961704,40.662942,Flatbush Avenue,11225,Brooklyn,Hamburgers,2014-12-30 00:00:00,A,8,2014-07-01 00:00:00,B,23,2013-04-30 00:00:00,A,12,2012-05-08 00:00:00,A,12,Wendy'S,30112340

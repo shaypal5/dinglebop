@@ -29,7 +29,7 @@ class DingleIndex(metaclass=abc.ABCMeta):
     construction is the result of inner constructor code, and thus shouldn't be
     reflected out.
 
-    If the TypeError is a result of a bad configuration field names or values,
+    If the TypeError is a result of bad configuration field names or values,
     which is the most likely scenario, a ConfigurationException should be
     thrown instead.
     """
