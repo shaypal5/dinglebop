@@ -1,6 +1,8 @@
 """Dataset objects."""
+# flake8: noqa
 
 import dinglebop.dataset.tabular
+import dinglebop.dataset.versioning
 
 for name in ['dataset', 'dinglebop']:
     try:

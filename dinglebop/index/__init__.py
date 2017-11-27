@@ -1,12 +1,15 @@
 """Dinglebop indexes."""
 
-from .index import DingleIndex
+from .index import (  # noqa: F401
+    get_index_by_conf_dict,
+    _add_index_type,
+)
 
 from .mongodb import MongoDBIndex
-DingleIndex._add_index_type('mongodb', MongoDBIndex)
+_add_index_type('MongoDB', MongoDBIndex)
 
 # clean the namespace of the package
-for name in ['MongoDBIndex', 'mongodb', 'index']:
+for name in ['DingleIndex', 'MongoDBIndex', 'mongodb', 'index']:
     try:
         globals().pop(name)
     except KeyError:

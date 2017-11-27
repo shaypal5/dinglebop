@@ -105,38 +105,40 @@ class DingleIndex(metaclass=abc.ABCMeta):
         """
         pass
 
-    _INDEX_CLASS_BY_TYPE = {}
 
-    @classmethod
-    def _add_index_type(cls, idx_type_identifier, idx_type_class):
-        cls._INDEX_CLASS_BY_TYPE[idx_type_identifier] = idx_type_class
+_INDEX_CLASS_BY_TYPE = {}
 
-    @classmethod
-    def get_index_by_conf_dict(cls, conf_dict):
-        """Returns a DingleIndex instance by the given conf_dict.
 
-        Arguments
-        ---------
-        conf_dict : dict
-            A configuration mapping for this DingleIndex.
+def _add_index_type(idx_type_identifier, idx_type_class):
+    _INDEX_CLASS_BY_TYPE[idx_type_identifier] = idx_type_class
 
-        Returns
-        -------
-        DingleIndex
-            A DingleIndex object representing a connection to the desired
-            dingle index.
-        """
-        try:
-            idx_type = conf_dict.pop('type')
-        except KeyError:
-            raise ConfigurationException(
-                "Index entries in dinglebop configuration must include a type"
-                " field!")
-        try:
-            cls._INDEX_CLASS_BY_TYPE[idx_type](**conf_dict)
-        except KeyError:
-            raise ConfigurationException(
-                "Uknown index type in dinglebop configuration. Terminating.")
-        except TypeError:
-            raise ConfigurationException(
-                "Uknown field in dinglebop index configuration. Terminating.")
+
+def get_index_by_conf_dict(conf_dict):
+    """Returns a DingleIndex instance by the given conf_dict.
+
+    Arguments
+    ---------
+    conf_dict : dict
+        A configuration mapping for this DingleIndex.
+
+    Returns
+    -------
+    DingleIndex
+        A DingleIndex object representing a connection to the desired
+        dingle index.
+    """
+    try:
+        idx_type = conf_dict.pop('type')
+    except KeyError:
+        raise ConfigurationException(
+            "Index entries in dinglebop configuration must include a type"
+            " field!")
+    try:
+        _INDEX_CLASS_BY_TYPE[idx_type](**conf_dict)
+    except KeyError:
+        raise ConfigurationException(
+            "Uknown index type {} in dinglebop configuration. "
+            "Terminating.".format(idx_type))
+    except TypeError:
+        raise ConfigurationException(
+            "Uknown field in dinglebop index configuration. Terminating.")

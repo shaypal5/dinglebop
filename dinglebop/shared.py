@@ -16,6 +16,10 @@ CACHE_DIR_NAME = 'cache'
 CACHE_DIR_PATH = os.path.join(DINGLEBOP_DIR_PATH, CACHE_DIR_NAME)
 os.makedirs(CACHE_DIR_PATH, exist_ok=True)
 
+# TEMP_DIR_NAME = 'temp'
+# TEMP_DIR_PATH = os.path.join(DINGLEBOP_DIR_PATH, TEMP_DIR_NAME)
+# os.makedirs(TEMP_DIR_PATH, exist_ok=True)
+
 
 MISSING_CONF_FILE_MSG = (
     "The mandatory dinglebop configuration file is missing from the expected "

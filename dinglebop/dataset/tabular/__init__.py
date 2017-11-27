@@ -1,7 +1,5 @@
 """Tabular datasets."""
 
-from .dictiterator import from_mongodb_tap  # noqa: F401
-
 for name in ['tabular', 'dictiterator']:
     try:
         globals().pop(name)
