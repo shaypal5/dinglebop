@@ -26,7 +26,7 @@ def checksum_incremental_by_num_digits(num_digits=None):
     pad all version numbers to bring them up to a length-three version number
     string, so version 3 will be written as 'v003'.
 
-    Arguments
+    Parameters
     ---------
     num_digits : int, optional
         The fixed number of digits this versioning scheme will support. If not
@@ -85,7 +85,7 @@ def checksum_dateint_incremental_by_num_digits(num_digits=None):
     length-three version number string, so version 3 created on December 17th,
     2017 will yield a version string of 'v20171217.003'.
 
-    Arguments
+    Parameters
     ---------
     num_digits : int, optional
         The fixed number of digits this versioning scheme will support. If not

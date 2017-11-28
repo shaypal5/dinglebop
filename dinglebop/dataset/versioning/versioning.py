@@ -3,7 +3,7 @@
 Versioning scheme are functions that calculate a version for a specific dump
 of a dataset, and have the following arguments and return type:
 
-Arguments
+Parameters
 ---------
 dataset : dinglebop.DataSet
     A dataset object representing a versioned dataset.
@@ -28,7 +28,7 @@ _NAME_TO_SCHEME = {}
 def scheme_by_name(scheme_name=None):
     """Returns a versioning scheme by its name.
 
-    Arguments
+    Parameters
     ---------
     scheme_name : str, optional
         The name of the scheme to get. If None is given, the default scheme is
@@ -52,7 +52,7 @@ def _set_scheme_by_name(scheme_name, scheme):
     """Sets a mapping of a version scheme name to a version scheme function,
     to be used by the scheme_by_name() function.
 
-    Arguments
+    Parameters
     ---------
     scheme_name : str
         The scheme name to map. Give None explicitly to set the given scheme

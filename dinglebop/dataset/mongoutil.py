@@ -12,7 +12,7 @@ from bson.json_util import (
 def dump_document_cursor_to_json(doc_cursor, file_path):
     """Writes documents in a pymongo cursor into a json file.
 
-    Arguments
+    Parameters
     ---------
     doc_cursor : pymongo.cursor.Cursor
         A pymongo document cursor returned by commands like find or aggregate.
@@ -31,7 +31,7 @@ def dump_document_cursor_to_json(doc_cursor, file_path):
 def load_document_iterator_from_json(file_path):
     """Creates a lazy iterator over documents from a json file.
 
-    Arguments
+    Parameters
     ---------
     file_path : str
         The full path of the file from which documents are read.

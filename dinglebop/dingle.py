@@ -35,7 +35,7 @@ MISSING_STORE_CONF_MSG = (
 class Dingle(object):
     """An instance of the dinglebop dataset storage and versioning system.
 
-    Arguments
+    Parameters
     ---------
     name : str
         The name of this dingle.
@@ -61,7 +61,7 @@ class Dingle(object):
     def upload(dataset_instance, overwrite=None, ignore_cache=None):
         """Uploads an instance of a dataset with the given version string.
 
-        Arguments
+        Parameters
         ---------
         dataset_instance : dinglebop.DatasetInstance
             The dataset instance to upload.

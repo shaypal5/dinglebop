@@ -6,7 +6,7 @@ from .tabular.tabular_factory import TabularDatasetFactory
 class DatasetFactory(object):
     """Generates dataset objects.
 
-    Arguments
+    Parameters
     ---------
     dingle : dinglebop.Dingle
         The dingle in whose context datasets will be generated.

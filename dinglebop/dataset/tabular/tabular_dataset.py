@@ -17,7 +17,7 @@ class TabularDataset(Dataset, metaclass=abc.ABCMeta):
     constructed over the supplied shleem.DataSource object (if it is of a
     supported type).
 
-    Arguments
+    Parameters
     ---------
     data_source : shleem
     """
@@ -26,7 +26,7 @@ class TabularDataset(Dataset, metaclass=abc.ABCMeta):
         """Returns the given version of this dataset as a pandas.DataFrame
         object.
 
-        Arguments
+        Parameters
         ---------
         version : str, optional
             The version of the dataset to get. If not given, the latest version
@@ -37,7 +37,7 @@ class TabularDataset(Dataset, metaclass=abc.ABCMeta):
     def as_ndarray(self, version=None):
         """Returns the given version of this dataset as a numpy.ndarray object.
 
-        Arguments
+        Parameters
         ---------
         version : str, optional
             The version of the dataset to get. If not given, the latest version
@@ -48,7 +48,7 @@ class TabularDataset(Dataset, metaclass=abc.ABCMeta):
     def as_dict_iter(self, version=None):
         """Returns the given version of this dataset as a iterator over dicts.
 
-        Arguments
+        Parameters
         ---------
         version : str, optional
             The version of the dataset to get. If not given, the latest version

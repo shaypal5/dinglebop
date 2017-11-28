@@ -8,7 +8,7 @@ from .dictiterator import (
 class TabularDatasetFactory(object):
     """Generates tabular dataset objects.
 
-    Arguments
+    Parameters
     ---------
     dingle : dinglebop.Dingle
         The dingle in whose context datasets will be generated.
@@ -21,7 +21,7 @@ class TabularDatasetFactory(object):
                          fieldnames=None, flatten=False, missing_val=None):
         """Creates a tabular dataset from a MongoDB data tap.
 
-        Arguments
+        Parameters
         ---------
         datatap : shleem.MongoDBQuery or shleem.MongoDBAggregation
             A MongoDB-based shleem data tap.

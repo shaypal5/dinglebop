@@ -39,7 +39,7 @@ class DictIterDataset(TabularDataset, metaclass=abc.ABCMeta):
 class RawMongoDBDataset(DictIterDataset):
     """A tabular dataset based on a MongoDB query.
 
-    Arguments
+    Parameters
     ---------
         dingle : dinglebop.Dingle
             The dingle this dataset will be stored and versioned on.

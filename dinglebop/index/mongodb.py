@@ -16,8 +16,8 @@ from .index import DingleIndex
 class MongoDBIndex(DingleIndex):
     """A MongoDB-based implmentation of DingleIndex.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     hosts : list
         A list of host address string of the form <hostname>:<port>.
     username : str

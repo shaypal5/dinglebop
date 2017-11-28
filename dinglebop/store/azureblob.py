@@ -9,7 +9,7 @@ from .store import DingleStore
 class AzureBlobStore(DingleStore):
     """An Azure Blob-based implmentation of DingleStore.
 
-    Arguments
+    Parameters
     ---------
     account_name : str
         The name of the Azure account the Blob container belongs to.

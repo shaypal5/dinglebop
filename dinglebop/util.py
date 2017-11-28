@@ -16,7 +16,7 @@ MISSING_DINGLES_CONF_MSG = (
 def inject_dingle_attributes(module_obj):
     """Injects the given object with attributes per dingle configured.
 
-    Arguments
+    Parameters
     ---------
     module_obj : object
         The object to inject with Dingle objects as attributes.

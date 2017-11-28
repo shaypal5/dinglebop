@@ -10,6 +10,7 @@ from ..exceptions import (
 class DingleIndex(metaclass=abc.ABCMeta):
     """An index component in the dinglebop system."""
 
+
     """ === Note to contributers extending this class: ===
     When the factory method of this class instatiates a subclass by the type
     stated in the corresponding index entry in the dinglebop configuration
@@ -38,8 +39,8 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def get_all_dataset_entries(self, identifier, descending=True):
         """Returns an iterator over all index entries of a dataset.
 
-        Arguments
-        ---------
+        Parameters
+        ----------
         identifier : str
             The identifier of the dataset whose entries are fetched.
         descending : boo, default True
@@ -52,8 +53,8 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def get_latest_dataset_entry(self, identifier):
         """Returns the index entry of the latest version of the given dataset.
 
-        Arguments
-        ---------
+        Parameters
+        ----------
         identifier : str
             The identifier of the dataset whose entries are fetched.
         """
@@ -63,12 +64,18 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def get_dataset_entry_by_version(self, identifier, version):
         """Returns the index entry of the given dataset version.
 
-        Arguments
-        ---------
+        Parameters
+        ----------
         identifier : str
             The identifier of the dataset whose entry is fetched.
         version : str
             The version of the dataset whose entry is fetched.
+
+        Returns
+        -------
+        dict
+            The matching dataset entry, if exists. None, if no such entry
+            exists.
         """
         pass
 
@@ -76,8 +83,8 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def add_entry(self, identifier, version, store, format_identifier):
         """Adds the given dataset entry to index.
 
-        Arguments
-        ---------
+        Parameters
+        ----------
         identifier : str
             The identifier of the dataset.
         version : str
@@ -94,8 +101,8 @@ class DingleIndex(metaclass=abc.ABCMeta):
     def remove_entries(self, identifier, version=None):
         """Removes either a single or all the entries of a dataset.
 
-        Arguments
-        ---------
+        Parameters
+        ----------
         identifier : str
             The identifier of the dataset whose entries will be removed.
         version : str, optional
@@ -116,7 +123,7 @@ def _add_index_type(idx_type_identifier, idx_type_class):
 def get_index_by_conf_dict(conf_dict):
     """Returns a DingleIndex instance by the given conf_dict.
 
-    Arguments
+    Parameters
     ---------
     conf_dict : dict
         A configuration mapping for this DingleIndex.
