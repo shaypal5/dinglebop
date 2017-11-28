@@ -1,8 +1,5 @@
 """Define dingles."""
 
-# import os
-# from datetime import datetime
-
 from .dataset.dataset_factory import (
     DatasetFactory,
 )
@@ -58,7 +55,8 @@ class Dingle(object):
         self.stores = [get_store_by_conf_dict(store) for store in store_conf]
         self.dataset = DatasetFactory(dingle=self)
 
-    def upload(dataset_instance, overwrite=None, ignore_cache=None):
+    def upload(self, dataset_instance, serialization_format=None,
+               overwrite=None, ignore_cache=None):
         """Uploads an instance of a dataset with the given version string.
 
         Parameters
@@ -73,14 +71,21 @@ class Dingle(object):
             local machine cache will be ignored, if it exists. False by
             default.
         """
-        pass
-        # if version is None:
-        #     temp_fpath = dataset.dump()
-        #     dump_dtime = datetime.utcnow()
-        #     version_str = dataset._get_version_str(
-        #         filepath=temp_fpath,
-        #         dumpdtime=dump_dtime,
-        #         dingle_index=self.index
-        #     )
-        #     fpath = dataset._dump_dpath(version=version_str)
-        #     os.rename(temp_fpath, fpath)
+        fpath = dataset_instance.dump(
+            serialization_format=serialization_format,
+            ignore_cache=ignore_cache,
+        )
+        # version = dataset_instance.get_version()
+        in_stores = []
+        for store in self.stores:
+            if store.upload(dataset_instance, fpath, overwrite=overwrite):
+                in_stores.append(store.name)
+        self.index.add_entry(
+            dataset_instance=dataset_instance,
+            stores=in_stores,
+            serialization_format=serialization_format,
+            overwrite=overwrite,
+        )
+
+    def download(self, dataset_instance, serialization_format=None):
+

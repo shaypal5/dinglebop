@@ -43,15 +43,6 @@ class Dataset(object, metaclass=abc.ABCMeta):
     def __repr__(self):
         return "DataSet: {}".format(self.identifier)
 
-    def _cache_file_path(self, version=None):
-        prefix = os.path.join(CACHE_DIR_PATH, self.identifier)
-        if version is not None:
-            prefix += version
-        pattern = prefix + '*'
-        candidates = sorted(glob.glob(pattern))
-        # last fname, lexicographically
-        return candidates[-1]
-
     @abc.abstractmethod
     def _instantiate(self, version):
         """Instantiate an instance object of this dataset.
@@ -87,23 +78,6 @@ class Dataset(object, metaclass=abc.ABCMeta):
         if version:
             return self._version_cache(version=version)
         return self._instantiate(version=version)
-
-    @abc.abstractclassmethod
-    def _file_ext():
-        pass
-
-    def _fname(self, version=None):
-        """Returns a filename appropriate for a dump of this dataset.
-
-        Parameters
-        ---------
-        version : str
-            The version string to embed in the file name. If None is given, a
-            random version string is generated.
-        """
-        if version is None:
-            version = uuid.uuid4().hex
-        return self.identifier + '_' + version + '.' + self._file_ext()
 
     def _get_version_str(self, filepath, dump_dtime, dingle_index):
         """Calculates a version for a specific dump of the dataset.
@@ -147,7 +121,8 @@ class Dataset(object, metaclass=abc.ABCMeta):
         instance = self.version(version=version)
         return instance.dump(filepath=filepath)
 
-    def upload(self, version=None, overwrite=None, ignore_cache=None):
+    def upload(self, version=None, serialization_format=None, overwrite=None,
+               ignore_cache=None):
         """Uploads an instance of a dataset with the given version string.
 
         Parameters
@@ -165,7 +140,9 @@ class Dataset(object, metaclass=abc.ABCMeta):
             default.
         """
         instance = self.version(version=version)
-        instance.upload(overwrite=overwrite, ignore_cache=ignore_cache)
+        instance.upload(
+            overwrite=overwrite, serialization_format=serialization_format,
+            ignore_cache=ignore_cache)
 
 
 class DatasetInstance(object, metaclass=abc.ABCMeta):
@@ -194,7 +171,8 @@ class DatasetInstance(object, metaclass=abc.ABCMeta):
         """
         pass
 
-    def upload(self, overwrite=None, ignore_cache=None):
+    def upload(self, serialization_format=None, overwrite=None,
+               ignore_cache=None):
         """Uploads this dataset instance.
 
         Parameters
@@ -210,14 +188,63 @@ class DatasetInstance(object, metaclass=abc.ABCMeta):
         self.dataset.dingle.upload(
             dataset_instance=self,
             overwrite=overwrite,
+            serialization_format=serialization_format,
             ignore_cache=ignore_cache,
         )
 
-    def _dump_fpath(self, filepath=None, version=None):
+    @abc.abstractclassmethod
+    def default_serialization_format(cls):
+        """Returns the file extension of the deault serialization format of
+        datasets of this type."""
+        pass
+
+    def _fname(self, serialization_format=None):
+        """Returns a filename appropriate for a dump of this dataset.
+
+        Parameters
+        ---------
+        version : str
+            The version string to embed in the file name. If None is given, a
+            random version string is generated.
+        """
+        if self.version is None:
+            version = uuid.uuid4().hex
+        else:
+            version = self.version
+        if serialization_format is None:
+            serialization_format = self.default_serialization_format()
+        return self.identifier + '_' + version + '.' + serialization_format
+
+    def _find_in_cache(self, version=None):
+        prefix = os.path.join(CACHE_DIR_PATH, self.identifier)
+        if version is not None:
+            prefix += version
+        pattern = prefix + '*'
+        candidates = sorted(glob.glob(pattern))
+        # last fname, lexicographically
+        return candidates[-1]
+
+    def _cache_filepath(self, filepath=None, serialization_format=None):
         if filepath:
             return filepath
-        return os.path.join(CACHE_DIR_PATH, self._fname(version=version))
+        fname = self._fname(serialization_format=serialization_format)
+        return os.path.join(CACHE_DIR_PATH, fname)
 
     @abc.abstractmethod
-    def _dump_helper(self, filepath):
+    def _dump_helper(self, loaded, filepath, serialization_format):
         pass
+
+    def dump(self, filepath=None, serialization_format=None, ignore_cache=None):
+        """Dumps this dataset instance to file.
+
+        Parameters
+        ----------
+        filepath : str, optional
+            A fully qualified path
+        """
+        loaded = self.load(ignore_cache=ignore_cache)
+        if serialization_format is None
+            serialization_format = self.default_serialization_format()
+        filepath = self._cache_filepath(
+            filepath=filepath, serialization_format=serialization_format)
+        self._dump_helper(loaded, filepath, serialization_format)
